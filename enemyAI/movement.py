@@ -3,8 +3,10 @@ from __future__ import division
 import pygame
 import sys
 import math
+import time
 from pygame.locals import *
 import classEnemy
+import classSpawnPoint
 
 """
 ========================================================================================================================
@@ -72,9 +74,10 @@ class Enemy(object):
         self.rect = self.image.get_rect()
 
     def draw(self, surface):
-        rotImage = pygame.transform.rotate(self.image, (50 * self.angle))
-        rotRect = rotImage.get_rect(center = self.rect.center)
-        surface.blit(rotImage, (self.x + rotRect.x, self.y + rotRect.y))
+        #rotImage = pygame.transform.rotate(self.image, (1 * self.angle))
+        #rotRect = rotImage.get_rect(center = self.rect.center)
+        #surface.blit(rotImage, (self.x + rotRect.x, self.y + rotRect.y))
+        surface.blit(self.image, (self.x,self.y))
         pygame.display.update
 
 pygame.init()
@@ -82,12 +85,26 @@ screenX, screenY = 800, 600
 screen = pygame.display.set_mode((screenX, screenY))
 objPlayer = Player()
 objEnemy = Enemy()
+objEnemyii = Enemy()
+objEnemyii.x = 100
+objEnemyii.y = 300
 clock = pygame.time.Clock()
 pygame.mouse.set_visible(False) # Hide the cursor, TODO: stop cursor from escaping the window
 
 #while running
 blnRunning = True
-while blnRunning:
+spawnTopOne = classSpawnPoint()
+spawnTopTwo = classSpawnPoint()
+spawnTopThree = classSpawnPoint()
+spawnTopFour = classSpawnPoint()
+spawnFlankOne = classSpawnPoint()
+spawnFlankTwo = classSpawnPoint()
+spawnFlankThree = classSpawnPoint()
+spawnFlankFour = classSpawnPoint()
+spawnBottomOne = classSpawnPoint()
+spawnBottomTwo = classSpawnPoint()
+spawnBottomThree = classSpawnPoint()
+spawnBottomFour = classSpawnPoint()
 
 
     for event in pygame.event.get():
@@ -131,7 +148,8 @@ while blnRunning:
         if keys[K_d]:
             objPlayer.move_right(half)
     screen.fill((255, 255, 255))
-    objPlayer.draw(screen)
     objEnemy.draw(screen)
+    objEnemyii.draw(screen)
+    objPlayer.draw(screen)
     pygame.display.update()
     clock.tick(40)
