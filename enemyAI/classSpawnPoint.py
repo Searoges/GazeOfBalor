@@ -1,6 +1,5 @@
 """
 
 """
-
-
-boolPointOccupied = False
+class spawnPoint(object):
+    boolPointOccupied = False

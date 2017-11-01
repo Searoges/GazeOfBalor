@@ -74,9 +74,9 @@ class Enemy(object):
         self.rect = self.image.get_rect()
 
     def draw(self, surface):
-        #rotImage = pygame.transform.rotate(self.image, (1 * self.angle))
-        #rotRect = rotImage.get_rect(center = self.rect.center)
-        #surface.blit(rotImage, (self.x + rotRect.x, self.y + rotRect.y))
+        rotImage = pygame.transform.rotate(self.image, (1 * self.angle))
+        rotRect = rotImage.get_rect(center = self.rect.center)
+        surface.blit(rotImage, (self.x + rotRect.x, self.y + rotRect.y))
         surface.blit(self.image, (self.x,self.y))
         pygame.display.update
 
@@ -90,21 +90,21 @@ objEnemyii.x = 100
 objEnemyii.y = 300
 clock = pygame.time.Clock()
 pygame.mouse.set_visible(False) # Hide the cursor, TODO: stop cursor from escaping the window
-
-#while running
 blnRunning = True
-spawnTopOne = classSpawnPoint()
-spawnTopTwo = classSpawnPoint()
-spawnTopThree = classSpawnPoint()
-spawnTopFour = classSpawnPoint()
-spawnFlankOne = classSpawnPoint()
-spawnFlankTwo = classSpawnPoint()
-spawnFlankThree = classSpawnPoint()
-spawnFlankFour = classSpawnPoint()
-spawnBottomOne = classSpawnPoint()
-spawnBottomTwo = classSpawnPoint()
-spawnBottomThree = classSpawnPoint()
-spawnBottomFour = classSpawnPoint()
+while blnRunning:
+
+    spawnTopOne = classSpawnPoint.spawnPoint()
+    spawnTopTwo = classSpawnPoint.spawnPoint()
+    spawnTopThree = classSpawnPoint.spawnPoint()
+    spawnTopFour = classSpawnPoint.spawnPoint()
+    spawnFlankOne = classSpawnPoint.spawnPoint()
+    spawnFlankTwo = classSpawnPoint.spawnPoint()
+    spawnFlankThree = classSpawnPoint.spawnPoint()
+    spawnFlankFour = classSpawnPoint.spawnPoint()
+    spawnBottomOne = classSpawnPoint.spawnPoint()
+    spawnBottomTwo = classSpawnPoint.spawnPoint()
+    spawnBottomThree = classSpawnPoint.spawnPoint()
+    spawnBottomFour = classSpawnPoint.spawnPoint()
 
 
     for event in pygame.event.get():
@@ -141,12 +141,20 @@ spawnBottomFour = classSpawnPoint()
         # Move the player
         if keys[K_w]:
             objPlayer.move_up(half)
+            objEnemy.angle = math.atan2((objEnemy.x - objPlayer.x), (objEnemy.y - objPlayer.y))
+            objEnemyii.angle = math.atan2((objEnemyii.x - objPlayer.x), (objEnemyii.y - objPlayer.y))
         if keys[K_a]:
             objPlayer.move_left(half)
+            objEnemy.angle = math.atan2((objEnemy.x - objPlayer.x), (objEnemy.y - objPlayer.y))
+            objEnemyii.angle = math.atan2((objEnemyii.x - objPlayer.x), (objEnemyii.y - objPlayer.y))
         if keys[K_s]:
             objPlayer.move_down(half)
+            objEnemy.angle = math.atan2((objEnemy.x - objPlayer.x), (objEnemy.y - objPlayer.y))
+            objEnemyii.angle = math.atan2((objEnemyii.x - objPlayer.x), (objEnemyii.y - objPlayer.y))
         if keys[K_d]:
             objPlayer.move_right(half)
+            objEnemy.angle = math.atan2((objEnemy.x - objPlayer.x), (objEnemy.y - objPlayer.y))
+            objEnemyii.angle = math.atan2((objEnemyii.x - objPlayer.x), (objEnemyii.y - objPlayer.y))
     screen.fill((255, 255, 255))
     objEnemy.draw(screen)
     objEnemyii.draw(screen)
